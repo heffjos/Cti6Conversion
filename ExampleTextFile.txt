@@ -1,0 +1,3 @@
+#FullFilePath,ParticipantName,Time,Study
+/path/to/Cti6File.img,TestPatient,5-40,endopoid0
+C:\path\to\Cti6File.img,TestPatient,45-90,endopoid0
