@@ -1,8 +1,8 @@
 clear all;
-Cti6Files = spm_select(Inf, 'image', 'Select CTI6 files...');
+Cti6Files = spm_select(Inf, 'img$', 'Select CTI6 files...');
 
 for i = 1:size(Cti6Files, 1)
-    FileName = Cti6Files(i, 1:(end-2));
+    FileName = Cti6Files(i, :);
     [p f e] = fileparts(FileName);
 
     Cti6Hdr = ReadCti6Hdr(FileName);
