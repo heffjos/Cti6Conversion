@@ -2,18 +2,29 @@ clear all;
 Cti6Files = spm_select(Inf, 'img$', 'Select CTI6 files...');
 
 for i = 1:size(Cti6Files, 1)
-    FileName = Cti6Files(i, :);
+    FileName = strtrim(Cti6Files(i, :));
     [p f e] = fileparts(FileName);
 
     Cti6Hdr = ReadCti6Hdr(FileName);
-    for iFrame = [1 2]
+
+    % write out each frame, typically this is the k1 and dv in that order
+    % never have I seen a CTI6 file from the PET lab with > 2 frames, but
+    % the code can handle it
+    for iFrame = 1:Cti6Hdr.FrameNum
         % read data and flip for correct orientation
         Data = ReadCti6Data(Cti6Hdr, iFrame, FileName);
         Data = Data(end:-1:1,end:-1:1,end:-1:1);
 
         % create nifti header here
         dat = file_array;
-        dat.fname = fullfile(p, [f '.nii']);
+        if iFrame == 1
+            dat.fname = fullfile(p, [f '_k1.nii']);
+        elseif iFrame == 2
+            dat.fname = fullfile(p, [f '_dv.nii']);
+        else
+            dat.fname = fullfile(p, [f '_f' num2str(iFrame) '.nii']);
+        end
+
         dat.dim = [Cti6Hdr.dim1 Cti6Hdr.dim2 Cti6Hdr.dim3];
         dat.dtype = 'INT16-LE';
         dat.scl_slope = 1;
