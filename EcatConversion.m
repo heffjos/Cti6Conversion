@@ -63,6 +63,11 @@ for i = 1:size(Cti6Files, 1)
     NewField2 = fread(EcatFid, 16, 'uchar=>char')';
 
     fprintf(1, 'File name: %s\n', FileName);
+    fprintf(1, 'Frames   : %d', Cti6Hdr.FrameNum);
+    if Cti6Hdr.FrameNum ~= 2
+        fprintf(1, ' (EXPECTED 2; WEIRD CTI6 FILE)');
+    end
+    fprintf(1, '\n');
     fprintf(1, 'Field1   : %s\n', Fill1);
     fprintf(1, 'Field2   : %s\n\n', Fill2);
         
