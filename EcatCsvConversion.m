@@ -84,7 +84,7 @@ function EcatCsvConversion(FileList)
             dat = file_array;
             dat.fname = fullfile(pwd, Participants{i}, 'run_01', OutFile{iFrame});
             dat.dim = [Cti6Hdr.dim1 Cti6Hdr.dim2 Cti6Hdr.dim3];
-            dat.dtype = 'INT16-LE';
+            dat.dtype = 'FLOAT32-LE';
             dat.scl_slope = 1;
             dat.scl_inter = 0;
             dat.offset = 352;
