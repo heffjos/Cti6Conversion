@@ -11,8 +11,13 @@ function PrintEcatHeader(FileName)
             FileName{i} = Ecatfiles(i, :);
         end
         clear i
-    else ischar(FileName)
+    elseif ischar(FileName)
+        if exist(FileName, 'file') ~= 2
+            error('File does not exist: %s', FileName);
+        end
         FileName = {FileName};
+    else
+        error('Cannot handle input.')
     end
 
     PrintHdrs{1} = '----------------------';
@@ -26,7 +31,7 @@ function PrintEcatHeader(FileName)
 
     for i = 1:size(FileName, 1)    
         Fid = fopen(FileName{i}, 'rb', 'ieee-le');
-        fseek(Fid, 28);
+        fseek(Fid, 28, -1);
 
         original_file_name = freadVAXD(Fid, 20, 'char'); % 28 20
         sw_version = freadVAXD(Fid, 1, 'int16'); % 48 2
