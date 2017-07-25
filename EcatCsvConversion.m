@@ -91,9 +91,9 @@ function EcatCsvConversion(FileList)
             
             N = nifti();
             N.dat = dat;
-            N.mat = [Cti6Hdr.PixelSize 0  0 (Cti6Hdr.PixelSize * Cti6Hdr.dim1)/2;
-                0 Cti6Hdr.PixelSize 0 (Cti6Hdr.PixelSize * Cti6Hdr.dim2)/2;
-                0 0 Cti6Hdr.SliceWidth (Cti6Hdr.SliceWidth * Cti6Hdr.dim3)/2
+            N.mat = [Cti6Hdr.PixelSize 0  0 -(Cti6Hdr.PixelSize * Cti6Hdr.dim1)/2;
+                0 Cti6Hdr.PixelSize 0 -(Cti6Hdr.PixelSize * Cti6Hdr.dim2)/2;
+                0 0 Cti6Hdr.SliceWidth -(Cti6Hdr.SliceWidth * Cti6Hdr.dim3)/2
                 0 0 0 1];
             N.mat_intent = 'Scanner';
             N.mat0 = N.mat;
